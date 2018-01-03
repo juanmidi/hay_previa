@@ -1,3 +1,5 @@
+
+
 #image-user {
 	border-radius: 50% !important;
 	margin-top: 10%;
@@ -10,7 +12,40 @@
 
 }
 
- #map {
-        height: 400px;
-        width: 100%;
-       }
+
+#map {
+  height: 200px;
+  width: 100%;
+  }
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+}
+
+md-dialog-actions{
+	justify-content: center !important;
+}
+
+
+.md-title{
+	text-align: center;	
+}
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.dialogdemoBasicUsage button {
+  width: auto; }
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008; }
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+  margin-bottom: 0; }
+
+

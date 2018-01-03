@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute','satellizer','ngMaterial']);
+var app = angular.module('myApp', ['ngRoute','ngMaterial']);
 
 // //constantes
 // app.constant('OPTIONS', {
@@ -14,11 +14,11 @@ app.config(function($mdThemingProvider) {
     .accentPalette('blue');
 })
 
-app.config(['$locationProvider','$routeProvider', '$authProvider', 
-  function ($locationProvider, $routeProvider, $authProvider ) {
+app.config(['$locationProvider','$routeProvider', 
+  function ($locationProvider, $routeProvider ) {
     $locationProvider.hashPrefix('');
 
-    $authProvider.oauth2({
+   /*  $authProvider.oauth2({
       name: 'instagram',
       clientId: '550b63e2c02641d48dcb75926d358e55',
       redirectUri: 'http://localhost/hay_previa_ver2/',
@@ -28,7 +28,7 @@ app.config(['$locationProvider','$routeProvider', '$authProvider',
       scopeDelimiter: '+',
       oauthType: '2.0',
       authorizationEndpoint: 'https://api.instagram.com/oauth/authorize'
-    });
+    }); */
 
     $routeProvider
       .when('/', {
@@ -65,6 +65,8 @@ app.config(['$locationProvider','$routeProvider', '$authProvider',
           //si esta ruta no se agrega el satellizer NO levanta el access_token
           //No importa el nombre el parámetro. Yo puse '/:token_accesso'
           //Pero podés poner lo que quieras
+        templateUrl: 'partials/inicio.html',
+          controller: 'tokenCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -40,7 +40,7 @@
 			
         </md-content>
       </md-tab>
-      <md-tab label="Tipo y Privacidad" id="asd">
+      <md-tab label="Requisitos y Comentarios" id="asd">
         <md-content class="md-padding">
         	<md-card md-whiteframe="8">
           		<md-card-content>
@@ -55,27 +55,31 @@
 				      <label>Comentarios</label>
 						<textarea ng-model="user.comentarios" md-maxlength="100" rows="2" md-select-on-focus></textarea>
 				    </md-input-container>
-				    <md-input-container class="md-icon-float md-block">
-				      <md-icon>location_on</md-icon>
-				      <label>Dirección</label>
-      					<input ng-model="user.direccion" type="text" rows="2" placeholder="Ej: Hipolito Yrigoyen 230, Quilmes, Buenos Aires" >
-				    </md-input-container>
-
+				    
 
 			 	</md-card-content>
         		<md-divider></md-divider>
 			 	<md-card-footer layout="column"  layout-align="center center">
-				<md-button  layout="column" layout-align="center center" style="background-color: #000; color: #fff" class="md-raised" >
+				<md-button layout="column" layout-align="center center" style="background-color: #000; color: #fff" class="md-raised" >
 						  Siguiente Paso
 				</md-button>
 				</md-card-footer>
 			</md-card>
         </md-content>
       </md-tab>
-      <md-tab label="Dirección y Requisitos">
+      <md-tab label="Dirección">
         <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Three</h1>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        	<md-card md-whiteframe="8">
+          		<md-card-content>
+        	<md-input-container class="md-icon-float md-block">
+				      <md-icon>location_on</md-icon>
+				      <label>Dirección</label>
+      					<input id="pac-input" class="controls" ng-model="user.direccion" type="text" placeholder="Ej: Hipolito Yrigoyen 230, Quilmes, Buenos Aires" >
+
+				    </md-input-container>
+				<div id="map"></div>
+			</md-card-content>
+			</md-card>
         </md-content>
       </md-tab>
     </md-tabs>

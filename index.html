@@ -4,7 +4,7 @@
 	<title></title>
 	<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
 		@import url('https://fonts.googleapis.com/css?family=Lobster|Pacifico');
@@ -24,8 +24,9 @@
 
 	
 	<!-- API Google Maps -->
-	<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDxwvl7FJbLb7BwtAwYwzjanU521EGTLrE&?sensor=true'></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDxwvl7FJbLb7BwtAwYwzjanU521EGTLrE&?sensor=true'></script> -->
+  
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -39,7 +40,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
 
 	<!-- satellizer -->
-	<script src="js/satellizer.js"></script>
+	<!-- <script src="js/satellizer.js"></script> -->
 
 	<!-- <script type="text/javascript" src="cordova.js"></script> -->
 	<!-- <script type="text/javascript" src="js/index.js"></script> -->
@@ -79,7 +80,7 @@
     <md-content layout-padding="">
       <md-list>
       <md-subheader class="md-warn">
-			<img id="foto" md-whiteframe="8" id="image-side" src="" class="md-card-image" alt="image caption">
+			<img md-whiteframe="8" id="image-side" src="" class="md-card-image" alt="image caption">
       </md-subheader>
       <md-list-item ng-click="inicio()">
         <md-icon class="md-default-theme" class="material-icons">home</md-icon>
@@ -110,6 +111,7 @@
 
 
 	<div ng-view="" id="ng-view" class="mobile-wrap"></div>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxzScpdUqEveyeu_Dw1MuKo5KY2sTptXE&libraries=places" async
+  defer></script>
 </body>
 </html>

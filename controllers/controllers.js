@@ -1,74 +1,12 @@
-app.service('Map', function ($q) {
-    
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 13
-    });
-    var infoWindow = new google.maps.InfoWindow({ map: map });
-
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Tu ubicación');
-            map.setCenter(pos);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }
-});
-
-app.controller('mainController', function ($scope, $window, $location, $mdSidenav, $http, $location, $auth) {
-
-  $scope.authenticate = function(provider) {
-      $auth.authenticate(provider)
-        .then(function(response) {
-          //****************************
-          //resultados
-          console.log('Ya está loggeado con ' + provider + '!');
-          console.log("access_token")
-          console.log(response)
-          //****************************
-
-          var url = "https://api.instagram.com/v1/users/self/?access_token=";
-          var access_token = response.access_token;
-          localStorage.setItem("access_token", access_token);
-
-          $http.get(url + access_token).then(function(res){
-            //guarda en local los datos de usuario
-            localStorage.setItem("id", res.data.data.id);
-            localStorage.setItem("username", res.data.data.username);
-            localStorage.setItem("full_name", res.data.data.full_name);
-            localStorage.setItem("profile_picture", res.data.data.profile_picture);
-            localStorage.setItem("bio", res.data.data.bio);
-            localStorage.setItem("website", res.data.data.website);
-            localStorage.setItem("is_business", res.data.data.is_business);
-            $location.path('/');
-          })
-        })
-        .catch(function(error) {
-          if (error.message) {
-            // Satellizer promise reject error.
-            console.log(error.message);
-          } else if (error.data) {
-            // HTTP response error from server
-            console.log(error.data.message, error.status);
-          } else {
-            console.log(error);
-          }
-        });
-    };
-
+app.controller('mainController', function ($scope, $window, $location, $mdSidenav, $http, $location) {
+  $scope.login = function () {
+    var redirectURL = 'http://localhost/hay_previa_ver2/';
+    var clientId = "550b63e2c02641d48dcb75926d358e55";
+    var url = "https://api.instagram.com/oauth/authorize/?client_id="+ clientId +"&redirect_uri="+ redirectURL +"&response_type=token"
+    $window.location.href = url;
+  }
     $scope.getDatos = function(){
-      document.getElementById('foto').src = localStorage.getItem("profile_picture");
+      document.getElementById('image-side').src = localStorage.getItem("profile_picture");
       // document.getElementById('id').innerHTML  = localStorage.getItem("id");
       document.getElementById('username').innerHTML  = localStorage.getItem("username");
       // document.getElementById('full_name').innerHTML  = localStorage.getItem("full_name");
@@ -112,10 +50,10 @@ app.controller('mainController', function ($scope, $window, $location, $mdSidena
 
 })
 
-app.controller('inicioCtrl', function ($rootScope, $scope, $http, $auth, $window, $location) {
-    $scope.isAuthenticated = function() {
+app.controller('inicioCtrl', function ($rootScope, $scope, $http, $window, $location) {
+/*     $scope.isAuthenticated = function() {
       return $auth.isAuthenticated();
-    };
+    }; */
 
     
     $scope.verPerfil = function(){
@@ -127,6 +65,8 @@ app.controller('inicioCtrl', function ($rootScope, $scope, $http, $auth, $window
       document.getElementById('bio').innerHTML  = localStorage.getItem("bio");
       document.getElementById('website').innerHTML  = localStorage.getItem("website");
       document.getElementById('is_business').innerHTML  = localStorage.getItem("is_business");
+      document.getElementById('foto').src = localStorage.getItem("profile_picture");
+
     }
     
     // $scope.verPerfil();
@@ -137,23 +77,86 @@ app.controller('inicioCtrl', function ($rootScope, $scope, $http, $auth, $window
       $location.path("/");
       $scope.getDatos();
     }
-
 });
 
-app.controller('loginCtrl', function () {
 
+
+app.controller('tokenCtrl', function ($route, $routeParams, $http, $location) {
+  console.log("$routeParams.token_accesso")
+  console.log($routeParams.token_accesso)
+  var url = "https://api.instagram.com/v1/users/self/?access_token=";
+  var access_token = $routeParams.token_accesso.replace("access_token=","");
+  localStorage.setItem("access_token", access_token);
+
+  $http.get(url + access_token).then(function (res) {
+    //guarda en local los datos de usuario
+    localStorage.setItem("id", res.data.data.id);
+    localStorage.setItem("username", res.data.data.username);
+    localStorage.setItem("full_name", res.data.data.full_name);
+    localStorage.setItem("profile_picture", res.data.data.profile_picture);
+    localStorage.setItem("bio", res.data.data.bio);
+    localStorage.setItem("website", res.data.data.website);
+    localStorage.setItem("is_business", res.data.data.is_business);
+    $location.path('/');
+  })
 })
 
 app.controller('buscarCtrl', function ($route, $rootScope, $routeParams, Map) {
 
 })
 
-app.controller('crearCtrl', function ($location) {
+app.controller('crearCtrl', function ($location, $scope, $mdDialog) {
+  navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
+    enableHighAccuracy: true
+  });
+
+  $scope.tipoDeEvento = function (ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+      .title('¿Qué evento vas a hacer?')
+      .css('justify-content', 'center !important')
+      .targetEvent(ev)
+      .ok('Una Previa')
+      .cancel('Una Joda');
+
+    $mdDialog.show(confirm).then(function () {
+      $('#txt_evento').text('Vas a hacer una Previa');
+    }, function () {
+      $('#txt_evento').text('Vas a hacer un Joda');
+    });
+  };
+
+  $scope.tipoDePrivacidad = function (ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+      .title('¿Es Pública o Privada?')
+      .css('text-align', 'center !important')
+      .textContent('Si elegís la opcion "Pública", la dirección de tu evento estará accesible para todos los usuarios. Pero si elegís la opcion "Privada", tu dirección sera mostrada en forma de un icono de radio de 1km. Para que un usuario acceda a tu direccion exacta, tendra que mandarte una solicitud, y vos, aceptarla. ')
+      .targetEvent(ev)
+      .ok('Privada')
+      .cancel('Pública');
+
+    $mdDialog.show(confirm).then(function () {
+      $('#txt_priv').text('Evento Privado');
+    }, function () {
+      $('#txt_priv').text('Evento Público');
+    });
+  };
 
 })
 
-app.controller('perfilCtrl', function ($scope, $location) {
 
+app.controller('loginCtrl', function ($routeParams, $location) {
+  var tk = localStorage.getItem("access_token");
+  if (!tk){
+    $location.path("/login");
+  } else {
+    $location.path("/");
+  }
+})
+
+app.controller('perfilCtrl', function ($scope, $location) {
+  console.log("estoy en perfil")
   $scope.foto = localStorage.getItem("profile_picture");
   $scope.username = localStorage.getItem("username");
   $scope.id = localStorage.getItem("id");
@@ -163,7 +166,7 @@ app.controller('perfilCtrl', function ($scope, $location) {
   $scope.is_business  = localStorage.getItem("is_business");
 })
 
-app.controller('ajustesCtrl', function ($location) {
+app.controller('ajustesCtrl', function () {
 
 })
 

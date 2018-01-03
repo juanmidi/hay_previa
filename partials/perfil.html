@@ -3,12 +3,12 @@
 <md-card-header >
 	<md-card-avatar >
 		 <md-card-user layout="row"  layout-align="center center">
-		 		<img md-whiteframe="8" id="image-user" src="images/user.jpg" class="md-card-image" alt="image caption">
+		 		<img md-whiteframe="8" id="image-user" src="{{foto}}" class="md-card-image" alt="image caption">
 		 </md-card-user>
 	</md-card-avatar>
 	<md-card-content layout="column"  layout-align="center center">
-		<h2>Renzo Monteleone</h2>
-		<p>@renzomonteleone</p>
+		<h2>{{full_name}}</h2>
+		<p>@{{username}}</p>
 	</md-card-content>
 	<md-card-footer layout="column"  layout-align="center center">
       <md-button class="md-raised md-primary">Editar Cuenta</md-button>
