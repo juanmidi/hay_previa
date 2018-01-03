@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="es" ng-controller="mainController">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Lobster|Pacifico');
+	</style>
+
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+	<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script> -->
+
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script
+	  src="https://code.jquery.com/jquery-3.1.1.min.js"
+	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	  crossorigin="anonymous"></script>
+
+	
+	<!-- API Google Maps -->
+	<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDxwvl7FJbLb7BwtAwYwzjanU521EGTLrE&?sensor=true'></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+	<!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+
+	<!-- satellizer -->
+	<script src="js/satellizer.js"></script>
+
+	<!-- <script type="text/javascript" src="cordova.js"></script> -->
+	<!-- <script type="text/javascript" src="js/index.js"></script> -->
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="factory/factory.js"></script>
+	<script type="text/javascript" src="directives/directives.js"></script>
+	<script type="text/javascript" src="controllers/controllers.js"></script>
+	<script type="text/javascript" src="app/functions.js"></script>
+
+</head>
+<body md-swipe-right="openSideNavPanel()" md-swipe-left="closeSideNavPanel();">
+<md-toolbar md-whiteframe="8">
+    <div class="md-toolbar-tools">
+        <md-button ng-click="openSideNavPanel()" class="md-icon-button" aria-label="Icon">
+          
+						<i class="material-icons">dehaze</i>
+        </md-button>
+        <h2>
+          <span>Hay Previa</span>
+        </h2>
+        
+
+   </div>
+</md-toolbar>
+	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <md-toolbar layout="row">
+     <div class="md-toolbar-tools">
+        <h2>
+          <span id="username">¡Hola !</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+          <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
+        </md-button>
+       </div>
+    </md-toolbar> 
+    <md-content layout-padding="">
+      <md-list>
+      <md-subheader class="md-warn">
+			<img id="foto" md-whiteframe="8" id="image-side" src="" class="md-card-image" alt="image caption">
+      </md-subheader>
+      <md-list-item ng-click="inicio()">
+        <md-icon class="md-default-theme" class="material-icons">home</md-icon>
+        <p>Inicio</p>
+      </md-list-item>
+      <md-list-item ng-click="crear()">
+        <md-icon class="md-default-theme" class="material-icons">fiber_new</md-icon>
+        <p>Crear Evento</p>
+      </md-list-item>
+      <md-list-item ng-click="buscar()">
+        <md-icon class="md-default-theme" class="material-icons">search</md-icon>
+        <p>Buscar Evento</p>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-subheader class="md-no-sticky">Mi cuenta</md-subheader>
+      <md-list-item ng-click="perfil()">
+        <md-icon class="md-default-theme" class="material-icons">account_box</md-icon>
+        <p>Perfil</p>
+      </md-list-item>
+      <md-list-item ng-click="ajustes()">
+        <md-icon class="md-default-theme" class="material-icons">settings</md-icon>
+        <p>Ajustes</p>
+      </md-list-item>
+ </md-list>
+    </md-content> 
+</md-sidenav>
+
+
+
+	<div ng-view="" id="ng-view" class="mobile-wrap"></div>
+
+</body>
+</html>

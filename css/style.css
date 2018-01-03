@@ -1,0 +1,16 @@
+#image-user {
+	border-radius: 50% !important;
+	margin-top: 10%;
+	width: 50% !important;
+}
+
+#image-side {
+	border-radius: 50% !important;
+	width: 30%;
+
+}
+
+ #map {
+        height: 400px;
+        width: 100%;
+       }
